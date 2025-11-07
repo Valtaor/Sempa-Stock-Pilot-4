@@ -28,6 +28,14 @@ class ImportCSVModule {
     this.panel = document.getElementById('stocks-import-panel');
     this.dropZone = document.getElementById('csv-drop-zone');
     this.fileInput = document.getElementById('csv-file-input');
+    this.openButton = document.getElementById('stocks-import-csv');
+
+    console.log('🔍 Éléments trouvés:', {
+      panel: !!this.panel,
+      dropZone: !!this.dropZone,
+      fileInput: !!this.fileInput,
+      openButton: !!this.openButton
+    });
 
     if (!this.panel || !this.dropZone || !this.fileInput) {
       console.error('❌ Éléments du module ImportCSV non trouvés');
@@ -45,7 +53,26 @@ class ImportCSVModule {
   attachEventListeners() {
     console.log('🔗 Attachement des event listeners pour import CSV...');
 
-    // Bouton ouvrir - Event delegation simple
+    // Bouton ouvrir - Attacher directement sur le bouton
+    if (this.openButton) {
+      this.openButton.addEventListener('click', (e) => {
+        console.log('📥 Bouton import CSV cliqué (listener direct)', {
+          button: this.openButton,
+          buttonId: this.openButton.id,
+          viewParent: this.openButton.closest('.main-view')?.id,
+          viewActive: this.openButton.closest('.main-view')?.classList.contains('view-active'),
+          computedPointerEvents: window.getComputedStyle(this.openButton).pointerEvents
+        });
+        e.preventDefault();
+        e.stopPropagation();
+        this.open();
+      });
+      console.log('✅ Event listener attaché directement sur le bouton');
+    } else {
+      console.warn('⚠️ Bouton import CSV non trouvé, impossible d\'attacher l\'event listener');
+    }
+
+    // Bouton ouvrir - Event delegation comme backup
     document.addEventListener('click', (e) => {
       const target = this.getEventTargetElement(e);
       if (!target) {
@@ -54,7 +81,7 @@ class ImportCSVModule {
 
       const button = target.closest('#stocks-import-csv');
       if (button) {
-        console.log('📥 Bouton import CSV cliqué', {
+        console.log('📥 Bouton import CSV cliqué (event delegation)', {
           button: button,
           buttonId: button.id,
           viewParent: button.closest('.main-view')?.id,
@@ -66,7 +93,7 @@ class ImportCSVModule {
       }
     });
 
-    console.log('✅ Event listener document.click attaché');
+    console.log('✅ Event delegation attachée sur document');
 
     // Boutons fermer
     const closeBtn = document.getElementById('stocks-cancel-import');

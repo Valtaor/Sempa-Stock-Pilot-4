@@ -51,21 +51,14 @@ $version = time(); // Cache busting RADICAL - force rechargement total
 
 <!-- Fix visibilité produits + Sticky sidebar + Clics forcés -->
 <style>
-/* FIX CRITIQUE : Empêcher les vues cachées d'intercepter les clics */
+/* FIX CRITIQUE : Les vues cachées sont masquées avec display:none (géré par JS)
+   On ne désactive plus pointer-events globalement car ça bloque TOUS les clics
+   même sur les éléments enfants qui ont pointer-events: auto */
 .main-view {
-    pointer-events: none !important;
+    /* Pas de pointer-events: none - on laisse le JS gérer avec display */
 }
 
 .main-view.view-active {
-    pointer-events: auto !important;
-}
-
-/* IMPORTANT : Permettre les clics sur les boutons et liens même dans les vues inactives */
-.main-view button,
-.main-view a,
-.main-view input,
-.main-view select,
-.main-view textarea {
     pointer-events: auto !important;
 }
 
