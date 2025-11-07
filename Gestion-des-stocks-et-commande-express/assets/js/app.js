@@ -32,10 +32,11 @@ class StockPilotApp {
       // Afficher la vue par défaut (dashboard) et cacher les autres
       this.initializeViews();
 
-      // Initialiser le module dashboard
+      // Initialiser TOUS les modules dès le départ
+      // pour que les event listeners soient attachés même dans les vues cachées
       await this.initDashboard();
-
-      // Initialiser le bouton d'import CSV
+      await this.initProducts();
+      await this.initMovements();
       this.initCSVImport();
 
       this.initialized = true;
@@ -226,27 +227,36 @@ class StockPilotApp {
 
   /**
    * Initialise le module correspondant à la vue
+   * Note: Les modules sont déjà initialisés au démarrage,
+   * cette méthode sert juste à rafraîchir les données si nécessaire
    *
    * @param {string} viewName - Nom de la vue
    */
   async initModuleForView(viewName) {
     switch (viewName) {
       case 'dashboard':
-        await this.initDashboard();
+        // Dashboard déjà initialisé - ne rien faire
+        console.log('✅ Vue dashboard affichée');
         break;
       case 'products':
-        await this.initProducts();
+        // Products déjà initialisé - rafraîchir si nécessaire
+        if (window.productsModule && window.productsModule.initialized) {
+          console.log('✅ Vue produits affichée - rafraîchissement...');
+          window.productsModule.renderProducts();
+        }
         break;
       case 'movements':
-        await this.initMovements();
+        // Movements déjà initialisé - rafraîchir si nécessaire
+        if (window.movementsModule && window.movementsModule.initialized && window.movementsModule.refresh) {
+          console.log('✅ Vue mouvements affichée - rafraîchissement...');
+          await window.movementsModule.refresh();
+        }
         break;
       case 'reports':
-        console.log('✅ Vue rapports affichée (module à implémenter ultérieurement)');
-        // Le HTML de la vue existe dans stocks.php, on l'affiche juste
+        console.log('✅ Vue rapports affichée');
         break;
       case 'settings':
-        console.log('✅ Vue paramètres affichée (module à implémenter ultérieurement)');
-        // Le HTML de la vue existe dans stocks.php, on l'affiche juste
+        console.log('✅ Vue paramètres affichée');
         break;
     }
   }
