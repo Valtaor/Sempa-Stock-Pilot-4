@@ -11,6 +11,7 @@ class ImportCSVModule {
     this.fileInput = null;
     this.parsedData = null;
     this.initialized = false;
+    console.log('🏗️ ImportCSVModule constructor appelé');
   }
 
   /**
@@ -42,6 +43,8 @@ class ImportCSVModule {
    * Attache les event listeners
    */
   attachEventListeners() {
+    console.log('🔗 Attachement des event listeners pour import CSV...');
+
     // Bouton ouvrir - Event delegation simple
     document.addEventListener('click', (e) => {
       const target = this.getEventTargetElement(e);
@@ -51,12 +54,19 @@ class ImportCSVModule {
 
       const button = target.closest('#stocks-import-csv');
       if (button) {
-        console.log('📥 Bouton import CSV cliqué');
+        console.log('📥 Bouton import CSV cliqué', {
+          button: button,
+          buttonId: button.id,
+          viewParent: button.closest('.main-view')?.id,
+          viewActive: button.closest('.main-view')?.classList.contains('view-active')
+        });
         e.preventDefault();
         e.stopPropagation();
         this.open();
       }
     });
+
+    console.log('✅ Event listener document.click attaché');
 
     // Boutons fermer
     const closeBtn = document.getElementById('stocks-cancel-import');
@@ -128,6 +138,10 @@ class ImportCSVModule {
    * Ouvre la modale d'import
    */
   open() {
+    console.log('🔓 Ouverture du panel d\'import CSV', {
+      panel: this.panel,
+      panelHidden: this.panel?.hidden
+    });
     this.panel.hidden = false;
     this.reset();
   }
@@ -368,3 +382,4 @@ class ImportCSVModule {
 
 // Créer l'instance globale
 window.importCSVModule = new ImportCSVModule();
+console.log('✅ Module ImportCSVModule chargé et instance créée (window.importCSVModule)');
