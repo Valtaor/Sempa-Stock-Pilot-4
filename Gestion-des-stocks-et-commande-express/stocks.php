@@ -46,6 +46,7 @@ $version = time(); // Cache busting RADICAL - force rechargement total
 <link rel="stylesheet" href="<?php echo esc_url($assets_url . '/assets/css/components/loader.css?ver=' . $version); ?>">
 <link rel="stylesheet" href="<?php echo esc_url($assets_url . '/assets/css/components/dashboard.css?ver=' . $version); ?>">
 <link rel="stylesheet" href="<?php echo esc_url($assets_url . '/assets/css/components/product-card.css?ver=' . $version); ?>">
+<link rel="stylesheet" href="<?php echo esc_url($assets_url . '/assets/css/components/import-csv.css?ver=' . $version); ?>">
 <link rel="stylesheet" href="<?php echo esc_url($assets_url . '/assets/css/views/products-view.css?ver=' . $version); ?>">
 
 <!-- Fix visibilité produits + Sticky sidebar + Clics forcés -->
@@ -229,6 +230,7 @@ console.log('🔍 DIAGNOSTIC API:', {
 <script src="<?php echo esc_url($assets_url . '/assets/js/modules/dashboard.js?ver=' . $version); ?>"></script>
 <script src="<?php echo esc_url($assets_url . '/assets/js/modules/products.js?ver=' . $version); ?>"></script>
 <script src="<?php echo esc_url($assets_url . '/assets/js/modules/movements.js?ver=' . $version); ?>"></script>
+<script src="<?php echo esc_url($assets_url . '/assets/js/modules/import-csv.js?ver=' . $version); ?>"></script>
 
 <!-- StockPilot JavaScript - Application principale -->
 <script src="<?php echo esc_url($assets_url . '/assets/js/app.js?ver=' . $version); ?>"></script>
@@ -553,8 +555,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <article class="report-card">
                                 <h3><?php esc_html_e('Importer des données', 'sempa'); ?></h3>
                                 <p><?php esc_html_e('Importez des produits depuis un fichier CSV pour mettre à jour votre stock rapidement.', 'sempa'); ?></p>
-                                <button type="button" class="button button--primary" id="stocks-import-csv" onclick="console.log('📥 onclick HTML déclenché'); if(window.stockpilot && window.stockpilot.importButtonHandler) { window.stockpilot.importButtonHandler(event); } else { document.getElementById('csv-file-input').click(); } return false;"><?php esc_html_e('Importer un CSV', 'sempa'); ?></button>
-                                <input type="file" id="csv-file-input" accept=".csv" style="display: none;" />
+                                <button type="button" class="button button--primary" id="stocks-import-csv"><?php esc_html_e('Importer un CSV', 'sempa'); ?></button>
                             </article>
                             <article class="report-card">
                                 <h3><?php esc_html_e('Documents techniques', 'sempa'); ?></h3>
@@ -717,6 +718,55 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <button type="button" class="button button--ghost" data-dismiss="movement"><?php esc_html_e('Annuler', 'sempa'); ?></button>
                             </div>
                         </form>
+                    </section>
+
+                    <section class="stocks-form stocks-form--wide" id="stocks-import-panel" hidden>
+                        <div class="stocks-form__header">
+                            <h2><?php esc_html_e('Importer des produits depuis un CSV', 'sempa'); ?></h2>
+                            <button type="button" class="stocks-form__close" id="stocks-cancel-import" aria-label="<?php esc_attr_e('Fermer l\'import CSV', 'sempa'); ?>"></button>
+                        </div>
+
+                        <div class="csv-drop-zone" id="csv-drop-zone">
+                            <i data-lucide="upload-cloud"></i>
+                            <h3><?php esc_html_e('Glissez-déposez votre fichier CSV ici', 'sempa'); ?></h3>
+                            <p><?php esc_html_e('ou cliquez pour sélectionner un fichier', 'sempa'); ?></p>
+                            <input type="file" id="csv-file-input" accept=".csv" style="display: none;" />
+                        </div>
+
+                        <div class="csv-format-info">
+                            <h4><?php esc_html_e('Format attendu', 'sempa'); ?></h4>
+                            <pre><code>reference,designation,categorie,fournisseur,etat_materiel,prix_achat,prix_vente,stock_actuel,stock_minimum,stock_maximum,emplacement,notes</code></pre>
+                            <div class="csv-format-note">
+                                <i data-lucide="info"></i>
+                                <span><?php esc_html_e('Les colonnes doivent correspondre exactement à ce format. La première ligne doit contenir les noms des colonnes.', 'sempa'); ?></span>
+                            </div>
+                            <a href="<?php echo esc_url(get_stylesheet_directory_uri() . '/exemple-import.csv'); ?>" class="button button--ghost" download>
+                                <i data-lucide="download"></i>
+                                <?php esc_html_e('Télécharger un exemple', 'sempa'); ?>
+                            </a>
+                        </div>
+
+                        <div id="csv-preview" class="csv-preview" hidden>
+                            <h4><?php esc_html_e('Prévisualisation des données', 'sempa'); ?></h4>
+                            <div id="csv-preview-content"></div>
+                            <div class="csv-preview-actions">
+                                <button type="button" class="button button--ghost" id="csv-cancel-preview">
+                                    <i data-lucide="x"></i>
+                                    <?php esc_html_e('Annuler', 'sempa'); ?>
+                                </button>
+                                <button type="button" class="button button--primary" id="csv-confirm-import">
+                                    <i data-lucide="check"></i>
+                                    <?php esc_html_e('Confirmer l\'import', 'sempa'); ?>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="csv-results" class="csv-results" hidden>
+                            <div id="csv-results-content"></div>
+                            <button type="button" class="button button--primary" id="csv-close-results">
+                                <?php esc_html_e('Fermer', 'sempa'); ?>
+                            </button>
+                        </div>
                     </section>
                 </aside>
             </div>
