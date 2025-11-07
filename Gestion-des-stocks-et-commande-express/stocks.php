@@ -282,31 +282,66 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('✅ Chart.js configuré pour StockPilot');
     }
 
-    // Déboggage module import CSV
-    setTimeout(() => {
-        const importButton = document.getElementById('stocks-import-csv');
-        const importPanel = document.getElementById('stocks-import-panel');
-        console.log('🔍 DÉBOGAGE IMPORT CSV:', {
-            buttonExists: !!importButton,
-            panelExists: !!importPanel,
-            moduleExists: typeof window.importCSVModule !== 'undefined',
-            moduleInitialized: window.importCSVModule?.initialized,
-            stockpilotExists: typeof window.stockpilot !== 'undefined',
-            stockpilotInitialized: window.stockpilot?.initialized
-        });
+    // EVENT LISTENERS DIRECTS POUR LES BOUTONS
+    // Attachés dès le chargement du DOM pour garantir qu'ils fonctionnent
 
-        if (importButton) {
-            console.log('🔍 État du bouton import:', {
-                id: importButton.id,
-                visible: importButton.offsetParent !== null,
-                pointerEvents: window.getComputedStyle(importButton).pointerEvents,
-                parentView: importButton.closest('.main-view')?.id,
-                viewActive: importButton.closest('.main-view')?.classList.contains('view-active'),
-                viewDisplay: importButton.closest('.main-view') ? window.getComputedStyle(importButton.closest('.main-view')).display : 'N/A',
-                viewPointerEvents: importButton.closest('.main-view') ? window.getComputedStyle(importButton.closest('.main-view')).pointerEvents : 'N/A'
-            });
-        }
-    }, 1000);
+    // Bouton "Imprimer les mouvements"
+    const printMovementsBtn = document.getElementById('stocks-print-movements');
+    if (printMovementsBtn) {
+        console.log('✅ Bouton imprimer mouvements trouvé, attachement de l\'event listener');
+        printMovementsBtn.addEventListener('click', function(e) {
+            console.log('🖨️ CLIC sur Imprimer les mouvements');
+            e.preventDefault();
+            e.stopPropagation();
+            const filtersDiv = document.getElementById('movements-print-filters');
+            if (filtersDiv) {
+                filtersDiv.style.display = 'block';
+                console.log('✅ Formulaire de dates affiché');
+            }
+        });
+    }
+
+    // Bouton "Annuler" impression
+    const cancelPrintBtn = document.getElementById('movements-print-cancel');
+    if (cancelPrintBtn) {
+        cancelPrintBtn.addEventListener('click', function(e) {
+            console.log('❌ Annulation impression');
+            e.preventDefault();
+            const filtersDiv = document.getElementById('movements-print-filters');
+            if (filtersDiv) {
+                filtersDiv.style.display = 'none';
+            }
+        });
+    }
+
+    // Bouton "Importer un CSV"
+    const importCSVBtn = document.getElementById('stocks-import-csv');
+    if (importCSVBtn) {
+        console.log('✅ Bouton importer CSV trouvé, attachement de l\'event listener');
+        importCSVBtn.addEventListener('click', function(e) {
+            console.log('📥 CLIC sur Importer CSV');
+            e.preventDefault();
+            e.stopPropagation();
+            const importPanel = document.getElementById('stocks-import-panel');
+            if (importPanel) {
+                importPanel.hidden = false;
+                console.log('✅ Panel d\'import affiché');
+            }
+        });
+    }
+
+    // Bouton fermer import CSV
+    const closeImportBtn = document.getElementById('stocks-cancel-import');
+    if (closeImportBtn) {
+        closeImportBtn.addEventListener('click', function(e) {
+            console.log('❌ Fermeture panel import');
+            e.preventDefault();
+            const importPanel = document.getElementById('stocks-import-panel');
+            if (importPanel) {
+                importPanel.hidden = true;
+            }
+        });
+    }
 });
 </script>
 
