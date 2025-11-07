@@ -285,10 +285,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // EVENT LISTENERS DIRECTS POUR LES BOUTONS
     // Attachés dès le chargement du DOM pour garantir qu'ils fonctionnent
 
+    // DIAGNOSTIC - Lister tous les éléments avec z-index
+    setTimeout(() => {
+        const allElements = document.querySelectorAll('*');
+        const elementsWithZIndex = [];
+        allElements.forEach(el => {
+            const zIndex = window.getComputedStyle(el).zIndex;
+            if (zIndex && zIndex !== 'auto') {
+                elementsWithZIndex.push({
+                    element: el.tagName + (el.id ? '#' + el.id : '') + (el.className ? '.' + el.className.split(' ')[0] : ''),
+                    zIndex: zIndex
+                });
+            }
+        });
+        console.log('🔍 Éléments avec z-index:', elementsWithZIndex.sort((a, b) => parseInt(b.zIndex) - parseInt(a.zIndex)));
+    }, 500);
+
     // Bouton "Imprimer les mouvements"
     const printMovementsBtn = document.getElementById('stocks-print-movements');
+    console.log('🔍 Recherche bouton imprimer mouvements:', {
+        exists: !!printMovementsBtn,
+        display: printMovementsBtn ? window.getComputedStyle(printMovementsBtn).display : 'N/A',
+        visibility: printMovementsBtn ? window.getComputedStyle(printMovementsBtn).visibility : 'N/A',
+        pointerEvents: printMovementsBtn ? window.getComputedStyle(printMovementsBtn).pointerEvents : 'N/A',
+        zIndex: printMovementsBtn ? window.getComputedStyle(printMovementsBtn).zIndex : 'N/A'
+    });
+
     if (printMovementsBtn) {
         console.log('✅ Bouton imprimer mouvements trouvé, attachement de l\'event listener');
+
+        // Forcer le style pour garantir la cliquabilité
+        printMovementsBtn.style.position = 'relative';
+        printMovementsBtn.style.zIndex = '999';
+        printMovementsBtn.style.pointerEvents = 'auto';
+        printMovementsBtn.style.cursor = 'pointer';
+
         printMovementsBtn.addEventListener('click', function(e) {
             console.log('🖨️ CLIC sur Imprimer les mouvements');
             e.preventDefault();
@@ -297,8 +328,19 @@ document.addEventListener('DOMContentLoaded', function() {
             if (filtersDiv) {
                 filtersDiv.style.display = 'block';
                 console.log('✅ Formulaire de dates affiché');
+            } else {
+                console.error('❌ Élément movements-print-filters non trouvé');
             }
-        });
+        }, true); // Use capture phase
+
+        // Ajouter aussi un listener sur mousedown comme backup
+        printMovementsBtn.addEventListener('mousedown', function(e) {
+            console.log('🖱️ MOUSEDOWN sur Imprimer les mouvements');
+        }, true);
+
+        console.log('✅ Event listeners attachés sur le bouton imprimer mouvements');
+    } else {
+        console.error('❌ Bouton imprimer mouvements NON TROUVÉ');
     }
 
     // Bouton "Annuler" impression
@@ -318,6 +360,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const importCSVBtn = document.getElementById('stocks-import-csv');
     if (importCSVBtn) {
         console.log('✅ Bouton importer CSV trouvé, attachement de l\'event listener');
+
+        // Forcer le style pour garantir la cliquabilité
+        importCSVBtn.style.position = 'relative';
+        importCSVBtn.style.zIndex = '999';
+        importCSVBtn.style.pointerEvents = 'auto';
+
         importCSVBtn.addEventListener('click', function(e) {
             console.log('📥 CLIC sur Importer CSV');
             e.preventDefault();
