@@ -1,0 +1,407 @@
+/**
+ * STYLES BOUTONS
+ *
+ * Styles pour le composant Button
+ */
+
+/* ============================================================================
+   BASE BUTTON
+   ============================================================================ */
+
+.sp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-spacing-sm);
+  padding: var(--sp-spacing-sm) var(--sp-spacing-md);
+  border: none;
+  border-radius: var(--sp-radius-md);
+  font-family: var(--sp-font-sans);
+  font-size: var(--sp-text-base);
+  font-weight: var(--sp-font-medium);
+  line-height: var(--sp-leading-normal);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--sp-transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.sp-btn:focus {
+  outline: none;
+}
+
+.sp-btn:focus-visible {
+  outline: 2px solid var(--sp-primary-500);
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+   VARIANTES
+   ============================================================================ */
+
+/* Primary (orange gradient) */
+.sp-btn--primary {
+  background: var(--sp-gradient-orange);
+  color: var(--sp-text-on-primary);
+  box-shadow: var(--sp-shadow-sm);
+}
+
+.sp-btn--primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--sp-shadow-md);
+}
+
+.sp-btn--primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--sp-shadow-sm);
+}
+
+/* Secondary (gris) */
+.sp-btn--secondary {
+  background: var(--sp-gray-600);
+  color: white;
+  box-shadow: var(--sp-shadow-sm);
+}
+
+.sp-btn--secondary:hover:not(:disabled) {
+  background: var(--sp-gray-700);
+  transform: translateY(-1px);
+  box-shadow: var(--sp-shadow-md);
+}
+
+.sp-btn--secondary:active:not(:disabled) {
+  background: var(--sp-gray-800);
+  transform: translateY(0);
+}
+
+/* Outline (contour) */
+.sp-btn--outline {
+  background: transparent;
+  border: 1px solid var(--sp-border-medium);
+  color: var(--sp-text-primary);
+}
+
+.sp-btn--outline:hover:not(:disabled) {
+  background: var(--sp-bg-secondary);
+  border-color: var(--sp-border-dark);
+}
+
+.sp-btn--outline:active:not(:disabled) {
+  background: var(--sp-bg-tertiary);
+}
+
+/* Ghost (transparent) */
+.sp-btn--ghost {
+  background: transparent;
+  color: var(--sp-text-primary);
+}
+
+.sp-btn--ghost:hover:not(:disabled) {
+  background: var(--sp-bg-secondary);
+}
+
+.sp-btn--ghost:active:not(:disabled) {
+  background: var(--sp-bg-tertiary);
+}
+
+/* Danger (rouge) */
+.sp-btn--danger {
+  background: var(--sp-danger-500);
+  color: white;
+  box-shadow: var(--sp-shadow-sm);
+}
+
+.sp-btn--danger:hover:not(:disabled) {
+  background: var(--sp-danger-600);
+  transform: translateY(-1px);
+  box-shadow: var(--sp-shadow-md);
+}
+
+.sp-btn--danger:active:not(:disabled) {
+  background: var(--sp-danger-700);
+  transform: translateY(0);
+}
+
+/* Success (vert) */
+.sp-btn--success {
+  background: var(--sp-success-500);
+  color: white;
+  box-shadow: var(--sp-shadow-sm);
+}
+
+.sp-btn--success:hover:not(:disabled) {
+  background: var(--sp-success-600);
+  transform: translateY(-1px);
+  box-shadow: var(--sp-shadow-md);
+}
+
+.sp-btn--success:active:not(:disabled) {
+  background: var(--sp-success-700);
+  transform: translateY(0);
+}
+
+/* ============================================================================
+   TAILLES
+   ============================================================================ */
+
+/* Small */
+.sp-btn--sm {
+  padding: 6px 12px;
+  font-size: var(--sp-text-sm);
+  gap: 6px;
+}
+
+.sp-btn--sm .sp-btn__icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Medium (défaut) */
+.sp-btn--md {
+  padding: var(--sp-spacing-sm) var(--sp-spacing-md);
+  font-size: var(--sp-text-base);
+}
+
+.sp-btn--md .sp-btn__icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Large */
+.sp-btn--lg {
+  padding: 12px 20px;
+  font-size: var(--sp-text-lg);
+  gap: var(--sp-spacing-sm);
+}
+
+.sp-btn--lg .sp-btn__icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================================================================
+   ICÔNES
+   ============================================================================ */
+
+.sp-btn__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.sp-btn__icon--left {
+  margin-right: -2px;
+}
+
+.sp-btn__icon--right {
+  margin-left: -2px;
+}
+
+/* Bouton icône seul */
+.sp-btn--icon-only {
+  padding: var(--sp-spacing-sm);
+  aspect-ratio: 1;
+}
+
+.sp-btn--icon-only.sp-btn--sm {
+  padding: 6px;
+  width: 32px;
+  height: 32px;
+}
+
+.sp-btn--icon-only.sp-btn--md {
+  padding: var(--sp-spacing-sm);
+  width: 36px;
+  height: 36px;
+}
+
+.sp-btn--icon-only.sp-btn--lg {
+  padding: 12px;
+  width: 44px;
+  height: 44px;
+}
+
+/* ============================================================================
+   ÉTATS
+   ============================================================================ */
+
+/* Désactivé */
+.sp-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Chargement */
+.sp-btn--loading {
+  position: relative;
+  color: transparent;
+  cursor: wait;
+}
+
+.sp-btn--loading .sp-btn__text,
+.sp-btn--loading .sp-btn__icon {
+  visibility: hidden;
+}
+
+/* Spinner de chargement */
+.sp-btn__spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: sp-btn-spin 0.6s linear infinite;
+}
+
+@keyframes sp-btn-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* ============================================================================
+   GROUPES DE BOUTONS
+   ============================================================================ */
+
+.sp-btn-group {
+  display: inline-flex;
+  gap: var(--sp-spacing-sm);
+}
+
+.sp-btn-group--attached {
+  gap: 0;
+}
+
+.sp-btn-group--attached .sp-btn:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -1px;
+}
+
+.sp-btn-group--attached .sp-btn:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.sp-btn-group--attached .sp-btn:hover:not(:disabled) {
+  z-index: 1;
+}
+
+/* ============================================================================
+   BOUTONS PLEINE LARGEUR
+   ============================================================================ */
+
+.sp-btn--block {
+  display: flex;
+  width: 100%;
+}
+
+/* ============================================================================
+   VARIANTES SPÉCIALES
+   ============================================================================ */
+
+/* Bouton lien */
+.sp-btn--link {
+  background: transparent;
+  color: var(--sp-primary-500);
+  padding: 0;
+  height: auto;
+  text-decoration: underline;
+}
+
+.sp-btn--link:hover:not(:disabled) {
+  color: var(--sp-primary-600);
+  text-decoration: none;
+  background: transparent;
+  transform: none;
+}
+
+/* Bouton avec danger en ghost */
+.sp-btn--ghost.sp-btn--danger-variant {
+  color: var(--sp-danger-500);
+}
+
+.sp-btn--ghost.sp-btn--danger-variant:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--sp-danger-600);
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 640px) {
+  /* Boutons plus larges sur mobile */
+  .sp-btn--block-mobile {
+    display: flex;
+    width: 100%;
+  }
+
+  /* Texte plus petit sur mobile */
+  .sp-btn {
+    font-size: var(--sp-text-sm);
+  }
+
+  .sp-btn--lg {
+    font-size: var(--sp-text-base);
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITÉ
+   ============================================================================ */
+
+/* Réduire les animations si préférence utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  .sp-btn {
+    transition: none;
+  }
+
+  .sp-btn:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .sp-btn__spinner {
+    animation-duration: 1.2s;
+  }
+}
+
+/* Mode high contrast */
+@media (prefers-contrast: high) {
+  .sp-btn--outline {
+    border-width: 2px;
+  }
+
+  .sp-btn:focus-visible {
+    outline-width: 3px;
+  }
+}
+
+/* ============================================================================
+   PRINT
+   ============================================================================ */
+
+@media print {
+  .sp-btn {
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+  }
+
+  .sp-btn--loading .sp-btn__spinner {
+    display: none;
+  }
+
+  .sp-btn--loading .sp-btn__text {
+    visibility: visible !important;
+  }
+}

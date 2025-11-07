@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockPilot - Dashboard</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="dashboard-styles.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+</head>
+<body>
+  <!-- Container principal -->
+  <div class="dashboard-container">
+
+    <!-- Header du dashboard -->
+    <div class="dashboard-header">
+      <h1 class="dashboard-header__title">Tableau de bord</h1>
+      <div class="dashboard-header__actions">
+        <!-- Toggle auto-refresh -->
+        <label class="sp-toggle">
+          <input type="checkbox" class="sp-toggle__input" id="toggle-auto-refresh" checked>
+          <span>Rafraîchissement auto (60s)</span>
+        </label>
+
+        <!-- Bouton rafraîchir -->
+        <button class="sp-btn sp-btn--outline sp-btn--icon-only" id="btn-refresh-dashboard">
+          <i data-lucide="refresh-cw"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Grille des métriques -->
+    <div id="dashboard-metrics">
+      <!-- Les cartes métriques seront injectées ici par JavaScript -->
+    </div>
+
+    <!-- Section graphiques -->
+    <div class="dashboard-charts">
+      <!-- Graphique évolution valeur stock -->
+      <div class="chart-container chart-container--large">
+        <div class="chart-container__header">
+          <h2 class="chart-container__title">Évolution de la valeur du stock</h2>
+          <button class="sp-btn sp-btn--ghost sp-btn--sm">
+            <i data-lucide="download"></i>
+            Exporter
+          </button>
+        </div>
+        <div class="chart-container__body">
+          <canvas id="chart-stock-value"></canvas>
+        </div>
+      </div>
+
+      <!-- Graphique répartition catégories -->
+      <div class="chart-container">
+        <div class="chart-container__header">
+          <h2 class="chart-container__title">Répartition par catégorie</h2>
+        </div>
+        <div class="chart-container__body">
+          <canvas id="chart-categories"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Graphique mouvements -->
+    <div class="dashboard-charts">
+      <div class="chart-container chart-container--large">
+        <div class="chart-container__header">
+          <h2 class="chart-container__title">Mouvements (7 derniers jours)</h2>
+        </div>
+        <div class="chart-container__body">
+          <canvas id="chart-movements"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section activité + alertes -->
+    <div class="dashboard-sidebar">
+      <!-- Fil d'activité -->
+      <div class="dashboard-panel">
+        <div class="dashboard-panel__header">
+          <h2 class="dashboard-panel__title">
+            <i data-lucide="activity"></i>
+            Activité récente
+          </h2>
+          <button class="sp-btn sp-btn--ghost sp-btn--sm">
+            <i data-lucide="maximize-2"></i>
+          </button>
+        </div>
+        <div id="activity-feed">
+          <!-- Le fil d'activité sera injecté ici -->
+        </div>
+      </div>
+
+      <!-- Alertes -->
+      <div class="dashboard-panel">
+        <div class="dashboard-panel__header">
+          <h2 class="dashboard-panel__title">
+            <i data-lucide="alert-triangle"></i>
+            Alertes stock bas
+          </h2>
+          <button class="sp-btn sp-btn--ghost sp-btn--sm">
+            <i data-lucide="settings"></i>
+          </button>
+        </div>
+        <div id="alerts-panel">
+          <!-- Les alertes seront injectées ici -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="dashboard-example.js" type="module"></script>
+  <script>
+    // Initialiser les icônes Lucide
+    lucide.createIcons();
+  </script>
+</body>
+</html>

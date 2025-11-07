@@ -1,0 +1,185 @@
+/**
+ * STYLES LOADER
+ *
+ * Styles pour le composant Loader/Spinner
+ */
+
+/* ============================================================================
+   BASE LOADER
+   ============================================================================ */
+
+.sp-loader {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-spacing-sm);
+}
+
+/* ============================================================================
+   SPINNER
+   ============================================================================ */
+
+.sp-loader__spinner {
+  border: 3px solid var(--sp-gray-200);
+  border-top-color: var(--sp-primary-500);
+  border-radius: 50%;
+  animation: sp-loader-spin 0.8s linear infinite;
+}
+
+@keyframes sp-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================================
+   TAILLES
+   ============================================================================ */
+
+.sp-loader--sm .sp-loader__spinner {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.sp-loader--md .sp-loader__spinner {
+  width: 24px;
+  height: 24px;
+  border-width: 3px;
+}
+
+.sp-loader--lg .sp-loader__spinner {
+  width: 40px;
+  height: 40px;
+  border-width: 4px;
+}
+
+.sp-loader--xl .sp-loader__spinner {
+  width: 64px;
+  height: 64px;
+  border-width: 5px;
+}
+
+/* ============================================================================
+   TEXTE
+   ============================================================================ */
+
+.sp-loader__text {
+  font-size: var(--sp-text-sm);
+  color: var(--sp-text-secondary);
+  text-align: center;
+}
+
+.sp-loader--sm .sp-loader__text {
+  font-size: var(--sp-text-xs);
+}
+
+.sp-loader--lg .sp-loader__text,
+.sp-loader--xl .sp-loader__text {
+  font-size: var(--sp-text-base);
+}
+
+/* ============================================================================
+   PLEIN ÉCRAN
+   ============================================================================ */
+
+.sp-loader--fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  z-index: var(--sp-z-modal);
+  display: flex;
+  animation: sp-loader-fade-in 0.2s ease-out;
+}
+
+[data-theme="dark"] .sp-loader--fullscreen {
+  background: rgba(17, 24, 39, 0.95);
+}
+
+@keyframes sp-loader-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================================================
+   VARIANTES DE COULEUR
+   ============================================================================ */
+
+.sp-loader--primary .sp-loader__spinner {
+  border-top-color: var(--sp-primary-500);
+}
+
+.sp-loader--success .sp-loader__spinner {
+  border-top-color: var(--sp-success-500);
+}
+
+.sp-loader--danger .sp-loader__spinner {
+  border-top-color: var(--sp-danger-500);
+}
+
+.sp-loader--info .sp-loader__spinner {
+  border-top-color: var(--sp-info-500);
+}
+
+/* ============================================================================
+   LOADER DANS CONTENEUR
+   ============================================================================ */
+
+.sp-loader--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(2px);
+  z-index: 10;
+  display: flex;
+}
+
+[data-theme="dark"] .sp-loader--overlay {
+  background: rgba(17, 24, 39, 0.9);
+}
+
+/* ============================================================================
+   ACCESSIBILITÉ
+   ============================================================================ */
+
+/* Ralentir l'animation si préférence utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  .sp-loader__spinner {
+    animation-duration: 1.6s;
+  }
+}
+
+/* Masquer visuellement mais garder pour lecteurs d'écran */
+.sp-loader[aria-hidden="true"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================================================
+   PRINT
+   ============================================================================ */
+
+@media print {
+  .sp-loader {
+    display: none !important;
+  }
+}

@@ -1,0 +1,11 @@
+reference,designation,categorie,fournisseur,etat_materiel,prix_achat,prix_vente,stock_actuel,stock_minimum,stock_maximum,emplacement,notes
+PROD001,Arduino Uno R3,Électronique,Arduino,neuf,15.50,25.00,10,5,50,A1-B2,Kit complet avec câble USB
+PROD002,Raspberry Pi 4 8GB,Électronique,Raspberry,neuf,75.00,120.00,8,3,30,A1-B3,Modèle 8GB RAM dernière génération
+PROD003,ESP32 DevKit,Électronique,Espressif,neuf,8.50,15.00,25,10,100,A2-C1,Module WiFi + Bluetooth
+PROD004,Capteur DHT22,Capteurs,Adafruit,neuf,4.50,8.00,50,20,200,B1-A1,Température et humidité
+PROD005,Écran LCD 16x2,Affichage,Generic,reconditionné,3.00,6.50,15,5,50,B2-C3,Rétroéclairage bleu
+PROD006,Moteur pas-à-pas NEMA17,Moteurs,Pololu,neuf,12.00,22.00,12,5,40,C1-D2,1.8° par pas
+PROD007,Alimentation 12V 5A,Alimentation,Mean Well,neuf,18.00,35.00,20,8,60,C2-E1,Certifiée CE
+PROD008,Breadboard 830 points,Prototypage,Generic,neuf,2.50,5.00,40,15,100,D1-A2,Sans soudure
+PROD009,Kit résistances,Composants,Generic,neuf,5.00,9.00,30,10,80,D2-B1,1/4W assortiment
+PROD010,Câbles Dupont M-M,Câbles,Generic,neuf,3.00,6.00,50,20,150,D3-C2,40 pièces 20cm

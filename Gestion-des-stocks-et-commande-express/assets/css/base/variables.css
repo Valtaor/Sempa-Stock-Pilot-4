@@ -1,0 +1,272 @@
+/**
+ * STOCKPILOT - DESIGN TOKENS
+ *
+ * Variables CSS pour le système de design
+ * Palette de couleurs conservée : gris foncé, accents orange, noir/blanc
+ */
+
+:root {
+  /* ========================================================================
+     PALETTE PRINCIPALE
+     ======================================================================== */
+
+  /* Orange (couleur principale) */
+  --sp-primary-500: #f4a412;
+  --sp-primary-600: #d4880e;
+  --sp-primary-700: #b4730c;
+  --sp-primary-400: #f6b942;
+  --sp-primary-300: #f8c971;
+  --sp-primary-200: #fadaa1;
+  --sp-primary-100: #fcebd0;
+
+  /* ========================================================================
+     PALETTE GRIS (Fond sombre dégradé)
+     ======================================================================== */
+
+  --sp-gray-900: #111827;
+  --sp-gray-800: #1f2937;
+  --sp-gray-700: #374151;
+  --sp-gray-600: #4b5563;
+  --sp-gray-500: #6b7280;
+  --sp-gray-400: #9ca3af;
+  --sp-gray-300: #d1d5db;
+  --sp-gray-200: #e5e7eb;
+  --sp-gray-100: #f3f4f6;
+  --sp-gray-50: #f9fafb;
+
+  /* ========================================================================
+     COULEURS SÉMANTIQUES (Statuts)
+     ======================================================================== */
+
+  /* Succès (vert) */
+  --sp-success-500: #10b981;
+  --sp-success-600: #059669;
+  --sp-success-700: #047857;
+  --sp-success-400: #34d399;
+  --sp-success-100: #d1fae5;
+
+  /* Avertissement (orange) */
+  --sp-warning-500: #f59e0b;
+  --sp-warning-600: #d97706;
+  --sp-warning-700: #b45309;
+  --sp-warning-400: #fbbf24;
+  --sp-warning-100: #fef3c7;
+
+  /* Danger (rouge) */
+  --sp-danger-500: #ef4444;
+  --sp-danger-600: #dc2626;
+  --sp-danger-700: #b91c1c;
+  --sp-danger-400: #f87171;
+  --sp-danger-100: #fee2e2;
+
+  /* Information (bleu) */
+  --sp-info-500: #3b82f6;
+  --sp-info-600: #2563eb;
+  --sp-info-700: #1d4ed8;
+  --sp-info-400: #60a5fa;
+  --sp-info-100: #dbeafe;
+
+  /* ========================================================================
+     COULEURS DE FOND
+     ======================================================================== */
+
+  --sp-bg-primary: #ffffff;
+  --sp-bg-secondary: #f9fafb;
+  --sp-bg-tertiary: #f3f4f6;
+  --sp-bg-dark: #111827;
+  --sp-bg-dark-secondary: #1f2937;
+
+  /* ========================================================================
+     COULEURS DE TEXTE
+     ======================================================================== */
+
+  --sp-text-primary: #111827;
+  --sp-text-secondary: #6b7280;
+  --sp-text-tertiary: #9ca3af;
+  --sp-text-inverse: #ffffff;
+  --sp-text-on-primary: #ffffff;
+
+  /* ========================================================================
+     COULEURS DE BORDURE
+     ======================================================================== */
+
+  --sp-border-light: #e5e7eb;
+  --sp-border-medium: #d1d5db;
+  --sp-border-dark: #9ca3af;
+  --sp-border-primary: #f4a412;
+
+  /* ========================================================================
+     DÉGRADÉS
+     ======================================================================== */
+
+  --sp-gradient-dark: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  --sp-gradient-orange: linear-gradient(135deg, #f4a412 0%, #d4880e 100%);
+  --sp-gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --sp-gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+
+  /* ========================================================================
+     OMBRES
+     ======================================================================== */
+
+  --sp-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --sp-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --sp-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --sp-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --sp-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --sp-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --sp-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+  /* ========================================================================
+     RAYONS DE BORDURE
+     ======================================================================== */
+
+  --sp-radius-xs: 4px;
+  --sp-radius-sm: 6px;
+  --sp-radius-md: 10px;
+  --sp-radius-lg: 14px;
+  --sp-radius-xl: 20px;
+  --sp-radius-2xl: 24px;
+  --sp-radius-full: 9999px;
+
+  /* ========================================================================
+     ESPACEMENTS
+     ======================================================================== */
+
+  --sp-spacing-0: 0;
+  --sp-spacing-xs: 4px;
+  --sp-spacing-sm: 8px;
+  --sp-spacing-md: 16px;
+  --sp-spacing-lg: 24px;
+  --sp-spacing-xl: 32px;
+  --sp-spacing-2xl: 48px;
+  --sp-spacing-3xl: 64px;
+  --sp-spacing-4xl: 96px;
+
+  /* ========================================================================
+     TYPOGRAPHIE
+     ======================================================================== */
+
+  /* Familles de polices */
+  --sp-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --sp-font-mono: 'Monaco', 'Courier New', monospace;
+
+  /* Tailles de police */
+  --sp-text-xs: 11px;
+  --sp-text-sm: 13px;
+  --sp-text-base: 14px;
+  --sp-text-lg: 16px;
+  --sp-text-xl: 18px;
+  --sp-text-2xl: 20px;
+  --sp-text-3xl: 24px;
+  --sp-text-4xl: 28px;
+  --sp-text-5xl: 32px;
+
+  /* Poids de police */
+  --sp-font-normal: 400;
+  --sp-font-medium: 500;
+  --sp-font-semibold: 600;
+  --sp-font-bold: 700;
+
+  /* Hauteur de ligne */
+  --sp-leading-tight: 1.25;
+  --sp-leading-normal: 1.5;
+  --sp-leading-relaxed: 1.75;
+
+  /* ========================================================================
+     TRANSITIONS
+     ======================================================================== */
+
+  --sp-transition-fast: 150ms ease;
+  --sp-transition-base: 200ms ease;
+  --sp-transition-slow: 300ms ease;
+  --sp-transition-slower: 500ms ease;
+
+  /* Timing functions */
+  --sp-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --sp-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --sp-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ========================================================================
+     Z-INDEX
+     ======================================================================== */
+
+  --sp-z-dropdown: 1000;
+  --sp-z-sticky: 1020;
+  --sp-z-fixed: 1030;
+  --sp-z-modal-backdrop: 1040;
+  --sp-z-modal: 1050;
+  --sp-z-popover: 1060;
+  --sp-z-tooltip: 1070;
+
+  /* ========================================================================
+     LARGEURS MAXIMALES
+     ======================================================================== */
+
+  --sp-max-w-xs: 320px;
+  --sp-max-w-sm: 384px;
+  --sp-max-w-md: 448px;
+  --sp-max-w-lg: 512px;
+  --sp-max-w-xl: 576px;
+  --sp-max-w-2xl: 672px;
+  --sp-max-w-3xl: 768px;
+  --sp-max-w-4xl: 896px;
+  --sp-max-w-5xl: 1024px;
+  --sp-max-w-6xl: 1152px;
+  --sp-max-w-7xl: 1280px;
+  --sp-max-w-full: 100%;
+
+  /* ========================================================================
+     BREAKPOINTS (pour référence, utilisés en media queries)
+     ======================================================================== */
+
+  --sp-breakpoint-sm: 640px;
+  --sp-breakpoint-md: 768px;
+  --sp-breakpoint-lg: 1024px;
+  --sp-breakpoint-xl: 1280px;
+  --sp-breakpoint-2xl: 1536px;
+}
+
+/* ============================================================================
+   THÈME SOMBRE (override des variables pour mode sombre)
+   ============================================================================ */
+
+[data-theme="dark"] {
+  /* Couleurs de fond inversées */
+  --sp-bg-primary: #111827;
+  --sp-bg-secondary: #1f2937;
+  --sp-bg-tertiary: #374151;
+
+  /* Couleurs de texte inversées */
+  --sp-text-primary: #f9fafb;
+  --sp-text-secondary: #d1d5db;
+  --sp-text-tertiary: #9ca3af;
+  --sp-text-inverse: #111827;
+
+  /* Bordures adaptées */
+  --sp-border-light: #374151;
+  --sp-border-medium: #4b5563;
+  --sp-border-dark: #6b7280;
+
+  /* Ombres plus subtiles en mode sombre */
+  --sp-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --sp-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --sp-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  --sp-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================================================
+   UTILITAIRES DE DÉBOGAGE
+   ============================================================================ */
+
+/* Afficher les marges en mode debug */
+.debug * {
+  outline: 1px solid red !important;
+}
+
+/* Afficher la grille en mode debug */
+.debug-grid {
+  background-image:
+    linear-gradient(rgba(244, 164, 18, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 164, 18, 0.1) 1px, transparent 1px);
+  background-size: 8px 8px;
+}

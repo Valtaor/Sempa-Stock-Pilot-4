@@ -1,0 +1,336 @@
+/**
+ * STYLES BADGES
+ *
+ * Styles pour le composant Badge
+ */
+
+/* ============================================================================
+   BASE BADGE
+   ============================================================================ */
+
+.sp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--sp-radius-sm);
+  font-family: var(--sp-font-sans);
+  font-size: 11px;
+  font-weight: var(--sp-font-semibold);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* ============================================================================
+   TAILLES
+   ============================================================================ */
+
+.sp-badge--sm {
+  padding: 2px 8px;
+  font-size: 10px;
+}
+
+.sp-badge--sm .sp-badge__icon {
+  width: 10px;
+  height: 10px;
+}
+
+.sp-badge--md {
+  padding: 4px 10px;
+  font-size: 11px;
+}
+
+.sp-badge--md .sp-badge__icon {
+  width: 12px;
+  height: 12px;
+}
+
+.sp-badge--lg {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.sp-badge--lg .sp-badge__icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ============================================================================
+   ICÔNE
+   ============================================================================ */
+
+.sp-badge__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+}
+
+/* ============================================================================
+   VARIANTES DE STATUT
+   ============================================================================ */
+
+/* Success (vert) */
+.sp-badge--success {
+  background: var(--sp-success-100);
+  color: var(--sp-success-700);
+  border: 1px solid var(--sp-success-400);
+}
+
+/* Warning (orange) */
+.sp-badge--warning {
+  background: var(--sp-warning-100);
+  color: var(--sp-warning-700);
+  border: 1px solid var(--sp-warning-400);
+}
+
+/* Danger (rouge) */
+.sp-badge--danger {
+  background: var(--sp-danger-100);
+  color: var(--sp-danger-700);
+  border: 1px solid var(--sp-danger-400);
+}
+
+/* Info (bleu) */
+.sp-badge--info {
+  background: var(--sp-info-100);
+  color: var(--sp-info-700);
+  border: 1px solid var(--sp-info-400);
+}
+
+/* Neutral (gris) */
+.sp-badge--neutral {
+  background: var(--sp-gray-100);
+  color: var(--sp-gray-700);
+  border: 1px solid var(--sp-gray-300);
+}
+
+/* ============================================================================
+   ANIMATION PULSE (pour alertes)
+   ============================================================================ */
+
+.sp-badge--pulse {
+  animation: sp-badge-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes sp-badge-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ============================================================================
+   VARIANTES SOLIDES
+   ============================================================================ */
+
+.sp-badge--solid.sp-badge--success {
+  background: var(--sp-success-500);
+  color: white;
+  border-color: var(--sp-success-600);
+}
+
+.sp-badge--solid.sp-badge--warning {
+  background: var(--sp-warning-500);
+  color: white;
+  border-color: var(--sp-warning-600);
+}
+
+.sp-badge--solid.sp-badge--danger {
+  background: var(--sp-danger-500);
+  color: white;
+  border-color: var(--sp-danger-600);
+}
+
+.sp-badge--solid.sp-badge--info {
+  background: var(--sp-info-500);
+  color: white;
+  border-color: var(--sp-info-600);
+}
+
+.sp-badge--solid.sp-badge--neutral {
+  background: var(--sp-gray-600);
+  color: white;
+  border-color: var(--sp-gray-700);
+}
+
+/* ============================================================================
+   VARIANTE OUTLINE
+   ============================================================================ */
+
+.sp-badge--outline {
+  background: transparent;
+}
+
+.sp-badge--outline.sp-badge--success {
+  color: var(--sp-success-600);
+  border-color: var(--sp-success-500);
+}
+
+.sp-badge--outline.sp-badge--warning {
+  color: var(--sp-warning-600);
+  border-color: var(--sp-warning-500);
+}
+
+.sp-badge--outline.sp-badge--danger {
+  color: var(--sp-danger-600);
+  border-color: var(--sp-danger-500);
+}
+
+.sp-badge--outline.sp-badge--info {
+  color: var(--sp-info-600);
+  border-color: var(--sp-info-500);
+}
+
+.sp-badge--outline.sp-badge--neutral {
+  color: var(--sp-gray-600);
+  border-color: var(--sp-gray-500);
+}
+
+/* ============================================================================
+   BADGE AVEC DOT (point coloré)
+   ============================================================================ */
+
+.sp-badge--dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.sp-badge--dot.sp-badge--success::before {
+  background: var(--sp-success-500);
+}
+
+.sp-badge--dot.sp-badge--warning::before {
+  background: var(--sp-warning-500);
+}
+
+.sp-badge--dot.sp-badge--danger::before {
+  background: var(--sp-danger-500);
+}
+
+.sp-badge--dot.sp-badge--info::before {
+  background: var(--sp-info-500);
+}
+
+.sp-badge--dot.sp-badge--neutral::before {
+  background: var(--sp-gray-500);
+}
+
+/* ============================================================================
+   BADGE ARRONDI
+   ============================================================================ */
+
+.sp-badge--rounded {
+  border-radius: var(--sp-radius-full);
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+/* ============================================================================
+   BADGE INTERACTIVE (cliquable)
+   ============================================================================ */
+
+.sp-badge--interactive {
+  cursor: pointer;
+  transition: all var(--sp-transition-fast);
+}
+
+.sp-badge--interactive:hover {
+  transform: scale(1.05);
+  box-shadow: var(--sp-shadow-sm);
+}
+
+.sp-badge--interactive:active {
+  transform: scale(0.98);
+}
+
+/* ============================================================================
+   BADGE AVEC BOUTON FERMER
+   ============================================================================ */
+
+.sp-badge--dismissible {
+  padding-right: 6px;
+  gap: 6px;
+}
+
+.sp-badge__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  border-radius: var(--sp-radius-xs);
+  transition: background-color var(--sp-transition-fast);
+  margin-left: 2px;
+}
+
+.sp-badge__close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.sp-badge__close svg {
+  width: 10px;
+  height: 10px;
+}
+
+/* ============================================================================
+   GROUPES DE BADGES
+   ============================================================================ */
+
+.sp-badge-group {
+  display: inline-flex;
+  gap: var(--sp-spacing-xs);
+  flex-wrap: wrap;
+}
+
+/* ============================================================================
+   ACCESSIBILITÉ
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-badge--pulse {
+    animation: none;
+  }
+
+  .sp-badge--interactive {
+    transition: none;
+  }
+}
+
+/* Mode high contrast */
+@media (prefers-contrast: high) {
+  .sp-badge {
+    border-width: 2px;
+  }
+}
+
+/* ============================================================================
+   PRINT
+   ============================================================================ */
+
+@media print {
+  .sp-badge {
+    border: 1px solid #000 !important;
+    color: #000 !important;
+  }
+
+  .sp-badge--pulse {
+    animation: none;
+  }
+
+  .sp-badge__close {
+    display: none;
+  }
+}

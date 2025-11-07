@@ -1,0 +1,221 @@
+/**
+ * IMPORT CSV STYLES
+ */
+
+.stocks-form--wide {
+    max-width: 900px;
+}
+
+/* Zone de drop */
+.csv-drop-zone {
+    border: 2px dashed var(--sp-color-border);
+    border-radius: var(--sp-radius-lg);
+    padding: 3rem 2rem;
+    text-align: center;
+    background: var(--sp-color-surface-alt);
+    cursor: pointer;
+    transition: all var(--sp-transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.csv-drop-zone:hover,
+.csv-drop-zone.dragover {
+    border-color: var(--sp-color-primary);
+    background: rgba(244, 164, 18, 0.05);
+}
+
+.csv-drop-zone svg {
+    width: 64px;
+    height: 64px;
+    color: var(--sp-color-primary);
+    stroke-width: 1.5;
+}
+
+.csv-drop-zone h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--sp-color-text);
+}
+
+.csv-drop-zone p {
+    margin: 0;
+    color: var(--sp-color-muted);
+}
+
+/* Format info */
+.csv-format-info {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--sp-gray-50);
+    border-radius: var(--sp-radius-md);
+}
+
+.csv-format-info h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    color: var(--sp-color-text);
+}
+
+.csv-format-info pre {
+    background: white;
+    padding: 1rem;
+    border-radius: var(--sp-radius-sm);
+    overflow-x: auto;
+    font-size: 0.875rem;
+    border: 1px solid var(--sp-color-border);
+}
+
+.csv-format-info code {
+    color: var(--sp-color-text);
+    font-family: 'Courier New', monospace;
+}
+
+.csv-format-note {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0 0 0;
+    padding: 0.75rem 1rem;
+    background: rgba(244, 164, 18, 0.1);
+    border-radius: var(--sp-radius-sm);
+    color: var(--sp-color-text);
+    font-size: 0.875rem;
+}
+
+.csv-format-note svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--sp-color-primary);
+}
+
+.csv-format-info .button {
+    margin-top: 1rem;
+}
+
+.csv-format-info .button svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Prévisualisation */
+.csv-preview {
+    margin-top: 2rem;
+}
+
+.csv-preview h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.125rem;
+    color: var(--sp-color-text);
+}
+
+.csv-preview-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: var(--sp-radius-md);
+    overflow: hidden;
+    border: 1px solid var(--sp-color-border);
+    font-size: 0.875rem;
+}
+
+.csv-preview-table th,
+.csv-preview-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--sp-color-border);
+}
+
+.csv-preview-table th {
+    background: var(--sp-gray-100);
+    font-weight: 600;
+    color: var(--sp-color-text);
+    white-space: nowrap;
+}
+
+.csv-preview-table td {
+    color: var(--sp-color-muted);
+}
+
+.csv-preview-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.csv-preview-note {
+    margin: 1rem 0 0 0;
+    color: var(--sp-color-muted);
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.csv-preview-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    justify-content: flex-end;
+}
+
+/* Résultats */
+.csv-results {
+    margin-top: 2rem;
+}
+
+.csv-results-summary {
+    padding: 2rem;
+    background: white;
+    border-radius: var(--sp-radius-lg);
+    border: 1px solid var(--sp-color-border);
+}
+
+.csv-results-summary h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+    color: var(--sp-color-text);
+}
+
+.csv-results-summary p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.csv-results-summary .success {
+    color: var(--sp-color-success);
+}
+
+.csv-results-summary .error {
+    color: var(--sp-color-accent);
+}
+
+.csv-errors {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(220, 38, 38, 0.05);
+    border-radius: var(--sp-radius-md);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.csv-errors h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    color: var(--sp-color-accent);
+}
+
+.csv-errors ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.csv-errors li {
+    margin: 0.5rem 0;
+    color: var(--sp-color-text);
+    font-size: 0.875rem;
+}
+
+/* Bouton fermer résultats */
+#csv-close-results {
+    margin-top: 1.5rem;
+    width: 100%;
+}

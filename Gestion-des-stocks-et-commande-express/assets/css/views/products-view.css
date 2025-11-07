@@ -1,0 +1,187 @@
+/**
+ * PRODUCTS VIEW STYLES
+ *
+ * Styles pour la vue produits
+ */
+
+/* ============================================================================
+   SECTION PRODUITS
+   ============================================================================ */
+
+#view-products {
+  background: var(--sp-bg-secondary, #f9fafb) !important;
+  min-height: 100vh !important;
+  padding: var(--sp-spacing-lg) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--sp-spacing-lg) !important;
+}
+
+/* Container de la grille avec fond pour contraste */
+#products-grid-container {
+  background: transparent !important;
+  min-height: 300px !important;
+  margin-top: var(--sp-spacing-lg) !important;
+  margin-bottom: var(--sp-spacing-lg) !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* S'assurer que les cartes ont un bon contraste */
+.sp-products-grid {
+  position: relative !important;
+  z-index: 1 !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: var(--sp-spacing-lg) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.sp-product-card {
+  /* Assurer un fond blanc pur avec ombre visible */
+  background: #ffffff !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+}
+
+/* État vide avec fond visible */
+#products-grid-container .sp-empty-state {
+  background: #ffffff;
+  padding: var(--sp-spacing-3xl);
+  border-radius: var(--sp-radius-lg);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+              0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================================================
+   TOOLBAR PRODUITS
+   ============================================================================ */
+
+.products-toolbar {
+  background: #ffffff;
+  border-radius: var(--sp-radius-lg);
+  padding: var(--sp-spacing-lg);
+  margin-bottom: var(--sp-spacing-lg);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+              0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================================================
+   PAGINATION
+   ============================================================================ */
+
+.products-pagination {
+  background: #ffffff;
+  border-radius: var(--sp-radius-lg);
+  padding: var(--sp-spacing-md) var(--sp-spacing-lg);
+  margin-top: var(--sp-spacing-lg);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+              0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-spacing-md);
+  flex-wrap: wrap;
+}
+
+.pagination-info,
+.pagination-status,
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-spacing-sm);
+}
+
+.pagination-info label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--sp-gray-600);
+}
+
+.pagination-info select {
+  padding: 6px 12px;
+  border: 1px solid var(--sp-border-light);
+  border-radius: var(--sp-radius-sm);
+  font-size: 14px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all var(--sp-transition-base);
+}
+
+.pagination-info select:hover {
+  border-color: var(--sp-primary-500);
+}
+
+.pagination-info select:focus {
+  outline: none;
+  border-color: var(--sp-primary-500);
+  box-shadow: 0 0 0 3px rgba(244, 164, 18, 0.1);
+}
+
+.pagination-status {
+  font-size: 14px;
+  color: var(--sp-gray-600);
+  font-weight: 500;
+}
+
+.pagination-controls {
+  gap: var(--sp-spacing-md);
+}
+
+.pagination-page-info {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sp-text-primary);
+  min-width: 100px;
+  text-align: center;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  #view-products {
+    padding: var(--sp-spacing-md);
+  }
+
+  .products-pagination {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sp-spacing-sm);
+  }
+
+  .pagination-info,
+  .pagination-status,
+  .pagination-controls {
+    justify-content: center;
+  }
+
+  .pagination-page-info {
+    min-width: auto;
+  }
+}
+
+/* ============================================================================
+   DEBUG - RETIRE APRÈS TEST
+   ============================================================================ */
+
+/* Bordure temporaire pour visualiser les conteneurs */
+.debug-products #products-grid-container {
+  border: 2px dashed var(--sp-primary-500);
+  min-height: 400px;
+}
+
+.debug-products .sp-products-grid {
+  border: 2px dashed var(--sp-success-500);
+}
+
+.debug-products .sp-product-card {
+  border: 2px solid var(--sp-danger-500) !important;
+}
