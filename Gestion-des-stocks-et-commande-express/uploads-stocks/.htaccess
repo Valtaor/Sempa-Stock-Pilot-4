@@ -1,0 +1,7 @@
+Options +Indexes
+IndexOptions FancyIndexing
+HeaderName /header.html
+
+<FilesMatch "\.(pdf|jpg|jpeg|png|gif|doc|docx|xls|xlsx)$">
+    Header set Content-Disposition inline
+</FilesMatch>
