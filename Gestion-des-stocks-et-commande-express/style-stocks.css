@@ -377,15 +377,15 @@
     gap: 0.75rem;
     align-items: center;
     position: relative;
-    z-index: 10;
+    z-index: 100 !important;
 }
 
 /* Harmoniser le survol des boutons dans section-actions */
 .section-actions .button {
-    cursor: pointer;
-    pointer-events: auto;
-    position: relative;
-    z-index: 10;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    position: relative !important;
+    z-index: 100 !important;
 }
 
 .section-actions .button:hover {
@@ -1270,9 +1270,9 @@ textarea {
 .report-card .button {
     margin-top: auto;
     width: 100%;
-    position: relative;
-    z-index: 10;
-    cursor: pointer;
+    position: relative !important;
+    z-index: 100 !important;
+    cursor: pointer !important;
     pointer-events: auto !important;
 }
 
