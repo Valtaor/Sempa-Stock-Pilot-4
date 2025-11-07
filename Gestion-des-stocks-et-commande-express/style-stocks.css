@@ -1266,6 +1266,21 @@ textarea {
 .report-card .button {
     margin-top: auto;
     width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Assurer que le texte des boutons reste visible */
+.report-card .button:hover {
+    color: inherit;
+}
+
+.report-card .button--primary:hover {
+    color: #ffffff;
+}
+
+.report-card .button--secondary:hover {
+    color: #ffffff;
 }
 
 .automation-grid {

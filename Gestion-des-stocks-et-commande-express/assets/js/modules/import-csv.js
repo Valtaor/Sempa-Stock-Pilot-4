@@ -51,7 +51,9 @@ class ImportCSVModule {
 
       const button = target.closest('#stocks-import-csv');
       if (button) {
+        console.log('📥 Bouton import CSV cliqué');
         e.preventDefault();
+        e.stopPropagation();
         this.open();
       }
     });
