@@ -60,6 +60,15 @@ $version = time(); // Cache busting RADICAL - force rechargement total
     pointer-events: auto !important;
 }
 
+/* IMPORTANT : Permettre les clics sur les boutons et liens même dans les vues inactives */
+.main-view button,
+.main-view a,
+.main-view input,
+.main-view select,
+.main-view textarea {
+    pointer-events: auto !important;
+}
+
 /* Force overflow visible sur TOUS les parents du sidebar */
 body,
 .sempa-stocks-wrapper,
@@ -279,6 +288,32 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         console.log('✅ Chart.js configuré pour StockPilot');
     }
+
+    // Déboggage module import CSV
+    setTimeout(() => {
+        const importButton = document.getElementById('stocks-import-csv');
+        const importPanel = document.getElementById('stocks-import-panel');
+        console.log('🔍 DÉBOGAGE IMPORT CSV:', {
+            buttonExists: !!importButton,
+            panelExists: !!importPanel,
+            moduleExists: typeof window.importCSVModule !== 'undefined',
+            moduleInitialized: window.importCSVModule?.initialized,
+            stockpilotExists: typeof window.stockpilot !== 'undefined',
+            stockpilotInitialized: window.stockpilot?.initialized
+        });
+
+        if (importButton) {
+            console.log('🔍 État du bouton import:', {
+                id: importButton.id,
+                visible: importButton.offsetParent !== null,
+                pointerEvents: window.getComputedStyle(importButton).pointerEvents,
+                parentView: importButton.closest('.main-view')?.id,
+                viewActive: importButton.closest('.main-view')?.classList.contains('view-active'),
+                viewDisplay: importButton.closest('.main-view') ? window.getComputedStyle(importButton.closest('.main-view')).display : 'N/A',
+                viewPointerEvents: importButton.closest('.main-view') ? window.getComputedStyle(importButton.closest('.main-view')).pointerEvents : 'N/A'
+            });
+        }
+    }, 1000);
 });
 </script>
 
