@@ -358,6 +358,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Bouton "Importer un CSV"
     const importCSVBtn = document.getElementById('stocks-import-csv');
+    console.log('🔍 Recherche bouton importer CSV:', {
+        exists: !!importCSVBtn,
+        display: importCSVBtn ? window.getComputedStyle(importCSVBtn).display : 'N/A',
+        visibility: importCSVBtn ? window.getComputedStyle(importCSVBtn).visibility : 'N/A',
+        pointerEvents: importCSVBtn ? window.getComputedStyle(importCSVBtn).pointerEvents : 'N/A',
+        zIndex: importCSVBtn ? window.getComputedStyle(importCSVBtn).zIndex : 'N/A',
+        parentView: importCSVBtn ? importCSVBtn.closest('.main-view')?.id : 'N/A',
+        viewDisplay: importCSVBtn && importCSVBtn.closest('.main-view') ? window.getComputedStyle(importCSVBtn.closest('.main-view')).display : 'N/A'
+    });
+
     if (importCSVBtn) {
         console.log('✅ Bouton importer CSV trouvé, attachement de l\'event listener');
 
@@ -365,17 +375,29 @@ document.addEventListener('DOMContentLoaded', function() {
         importCSVBtn.style.position = 'relative';
         importCSVBtn.style.zIndex = '999';
         importCSVBtn.style.pointerEvents = 'auto';
+        importCSVBtn.style.cursor = 'pointer';
 
         importCSVBtn.addEventListener('click', function(e) {
-            console.log('📥 CLIC sur Importer CSV');
+            console.log('📥 CLIC sur Importer CSV (event listener direct)');
             e.preventDefault();
             e.stopPropagation();
             const importPanel = document.getElementById('stocks-import-panel');
             if (importPanel) {
                 importPanel.hidden = false;
                 console.log('✅ Panel d\'import affiché');
+            } else {
+                console.error('❌ Élément stocks-import-panel non trouvé');
             }
-        });
+        }, true); // Use capture phase
+
+        // Ajouter aussi un listener sur mousedown comme backup
+        importCSVBtn.addEventListener('mousedown', function(e) {
+            console.log('🖱️ MOUSEDOWN sur Importer CSV');
+        }, true);
+
+        console.log('✅ Event listeners attachés sur le bouton importer CSV');
+    } else {
+        console.error('❌ Bouton importer CSV NON TROUVÉ');
     }
 
     // Bouton fermer import CSV

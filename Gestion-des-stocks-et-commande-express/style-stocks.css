@@ -1270,9 +1270,9 @@ textarea {
 .report-card .button {
     margin-top: auto;
     width: 100%;
-    position: relative;
-    z-index: 10;
-    cursor: pointer;
+    position: relative !important;
+    z-index: 100 !important;
+    cursor: pointer !important;
     pointer-events: auto !important;
 }
 
