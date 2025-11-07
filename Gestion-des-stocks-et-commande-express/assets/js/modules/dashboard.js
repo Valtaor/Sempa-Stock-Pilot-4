@@ -285,7 +285,7 @@ class DashboardModule {
   /**
    * Affiche le graphique répartition catégories
    */
-  renderCategoriesChart() {
+  async renderCategoriesChart() {
     const canvas = document.getElementById('chart-categories');
     if (!canvas) return;
 
@@ -295,23 +295,85 @@ class DashboardModule {
 
     this.charts.categories = new ChartComponent(canvas);
 
-    const chartData = {
-      labels: ['Électronique', 'Informatique', 'Mobilier', 'Consommables', 'Autres'],
-      datasets: [{
-        data: [35, 28, 20, 12, 5],
-        backgroundColor: [
-          '#f4a412',
-          '#10b981',
-          '#3b82f6',
-          '#8b5cf6',
-          '#ec4899'
-        ],
-        borderColor: '#1f2937',
-        borderWidth: 2
-      }]
-    };
+    try {
+      // Récupérer les produits depuis l'API
+      const apiClient = await this.getApiClient();
+      const response = await apiClient.getProducts();
+      const products = response.products || [];
 
-    this.charts.categories.createDoughnutChart(chartData);
+      // Calculer la répartition par catégorie
+      const categoryCount = {};
+      products.forEach(product => {
+        const category = product.categorie || 'Non catégorisé';
+        categoryCount[category] = (categoryCount[category] || 0) + 1;
+      });
+
+      // Si aucune catégorie, afficher un message
+      if (Object.keys(categoryCount).length === 0) {
+        canvas.parentElement.innerHTML = `
+          <div class="sp-empty-state">
+            <i data-lucide="pie-chart"></i>
+            <p>Aucune catégorie de produit</p>
+          </div>
+        `;
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+        return;
+      }
+
+      // Trier par nombre de produits (du plus grand au plus petit)
+      const sortedCategories = Object.entries(categoryCount)
+        .sort((a, b) => b[1] - a[1]);
+
+      // Prendre les 5 premières catégories
+      const topCategories = sortedCategories.slice(0, 5);
+
+      // Si plus de 5 catégories, regrouper le reste dans "Autres"
+      if (sortedCategories.length > 5) {
+        const othersCount = sortedCategories
+          .slice(5)
+          .reduce((sum, [_, count]) => sum + count, 0);
+        topCategories.push(['Autres', othersCount]);
+      }
+
+      // Préparer les données pour le graphique
+      const labels = topCategories.map(([name, _]) => name);
+      const data = topCategories.map(([_, count]) => count);
+
+      // Couleurs dynamiques
+      const colors = [
+        '#f4a412', // Orange SEMPA
+        '#10b981', // Vert
+        '#3b82f6', // Bleu
+        '#8b5cf6', // Violet
+        '#ec4899', // Rose
+        '#6b7280'  // Gris pour "Autres"
+      ];
+
+      const chartData = {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: colors.slice(0, labels.length),
+          borderColor: '#1f2937',
+          borderWidth: 2
+        }]
+      };
+
+      this.charts.categories.createDoughnutChart(chartData);
+    } catch (error) {
+      console.error('Erreur chargement graphique catégories:', error);
+      canvas.parentElement.innerHTML = `
+        <div class="sp-empty-state">
+          <i data-lucide="alert-circle"></i>
+          <p>Erreur de chargement</p>
+        </div>
+      `;
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
   }
 
   /**
