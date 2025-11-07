@@ -378,6 +378,31 @@
     align-items: center;
 }
 
+/* Harmoniser le survol des boutons dans section-actions */
+.section-actions .button {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.section-actions .button:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--sp-shadow-sm);
+}
+
+.section-actions .button--primary:hover {
+    background: var(--sp-color-primary-dark);
+}
+
+.section-actions .button--secondary:hover {
+    background: #111827;
+}
+
+.section-actions .button--ghost:hover {
+    color: var(--sp-color-text);
+    border-color: var(--sp-color-primary);
+    background: rgba(244, 164, 18, 0.12);
+}
+
 .section-eyebrow {
     font-size: 0.75rem;
     letter-spacing: 0.22em;
@@ -1243,18 +1268,29 @@ textarea {
     width: 100%;
     position: relative;
     z-index: 1;
+    cursor: pointer;
+    pointer-events: auto;
 }
 
 .report-card .button:hover {
-    color: inherit;
+    transform: translateY(-1px);
+    box-shadow: var(--sp-shadow-sm);
 }
 
 .report-card .button--primary:hover {
+    background: var(--sp-color-primary-dark);
     color: #ffffff;
 }
 
 .report-card .button--secondary:hover {
+    background: #111827;
     color: #ffffff;
+}
+
+.report-card .button--ghost:hover {
+    color: var(--sp-color-text);
+    border-color: var(--sp-color-primary);
+    background: rgba(244, 164, 18, 0.12);
 }
 
 .automation-grid {
