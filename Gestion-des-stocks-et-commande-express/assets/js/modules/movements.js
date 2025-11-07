@@ -36,11 +36,47 @@ class MovementsModule {
    * Configure les écouteurs d'événements
    */
   setupEventListeners() {
-    // Bouton Imprimer les mouvements
+    // Bouton Imprimer les mouvements - Afficher le formulaire de sélection de dates
     const printBtn = document.getElementById('stocks-print-movements');
     if (printBtn) {
-      printBtn.addEventListener('click', () => this.printMovements());
+      printBtn.addEventListener('click', () => this.showPrintFilters());
       console.log('✅ Handler Imprimer les mouvements configuré');
+    }
+
+    // Bouton confirmer l'impression
+    const confirmPrintBtn = document.getElementById('movements-print-confirm');
+    if (confirmPrintBtn) {
+      confirmPrintBtn.addEventListener('click', () => this.printMovements());
+      console.log('✅ Handler Confirmer impression configuré');
+    }
+
+    // Bouton annuler l'impression
+    const cancelPrintBtn = document.getElementById('movements-print-cancel');
+    if (cancelPrintBtn) {
+      cancelPrintBtn.addEventListener('click', () => this.hidePrintFilters());
+      console.log('✅ Handler Annuler impression configuré');
+    }
+  }
+
+  /**
+   * Affiche le formulaire de sélection de dates pour l'impression
+   */
+  showPrintFilters() {
+    console.log('📅 Affichage du formulaire de sélection de dates');
+    const filtersDiv = document.getElementById('movements-print-filters');
+    if (filtersDiv) {
+      filtersDiv.style.display = 'block';
+    }
+  }
+
+  /**
+   * Masque le formulaire de sélection de dates
+   */
+  hidePrintFilters() {
+    console.log('❌ Masquage du formulaire de sélection de dates');
+    const filtersDiv = document.getElementById('movements-print-filters');
+    if (filtersDiv) {
+      filtersDiv.style.display = 'none';
     }
   }
 
@@ -50,27 +86,41 @@ class MovementsModule {
   async printMovements() {
     console.log('🖨️ Impression des mouvements...');
 
-    // Demander la période
-    const startDate = prompt('Date de début (JJ/MM/AAAA) - Laissez vide pour tous les mouvements:', '');
-    const endDate = prompt('Date de fin (JJ/MM/AAAA) - Laissez vide pour aujourd\'hui:', '');
+    // Lire les dates depuis les inputs HTML
+    const startDateInput = document.getElementById('movements-start-date');
+    const endDateInput = document.getElementById('movements-end-date');
+
+    const startDateValue = startDateInput ? startDateInput.value : '';
+    const endDateValue = endDateInput ? endDateInput.value : '';
+
+    console.log('📅 Dates sélectionnées:', { start: startDateValue, end: endDateValue });
 
     // Filtrer les mouvements selon la période
     let filteredMovements = [...this.movements];
 
-    if (startDate) {
-      const [day, month, year] = startDate.split('/');
-      const start = new Date(year, month - 1, day);
+    if (startDateValue) {
+      const start = new Date(startDateValue);
+      start.setHours(0, 0, 0, 0);
       filteredMovements = filteredMovements.filter(m => new Date(m.date_mouvement) >= start);
     }
 
-    if (endDate) {
-      const [day, month, year] = endDate.split('/');
-      const end = new Date(year, month - 1, day, 23, 59, 59);
+    if (endDateValue) {
+      const end = new Date(endDateValue);
+      end.setHours(23, 59, 59, 999);
       filteredMovements = filteredMovements.filter(m => new Date(m.date_mouvement) <= end);
     }
 
+    console.log(`📊 ${filteredMovements.length} mouvements à imprimer`);
+
+    // Masquer le formulaire de sélection
+    this.hidePrintFilters();
+
+    // Formater les dates pour l'affichage
+    const startDateFormatted = startDateValue ? new Date(startDateValue).toLocaleDateString('fr-FR') : '';
+    const endDateFormatted = endDateValue ? new Date(endDateValue).toLocaleDateString('fr-FR') : '';
+
     // Générer le contenu imprimable
-    this.generatePrintableReport(filteredMovements, startDate, endDate);
+    this.generatePrintableReport(filteredMovements, startDateFormatted, endDateFormatted);
   }
 
   /**

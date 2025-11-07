@@ -526,7 +526,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <p class="section-subtitle"><?php esc_html_e('Analysez les entrées, sorties et ajustements récents.', 'sempa'); ?></p>
                             </div>
                             <div class="section-actions">
-                                <button type="button" class="button button--ghost" id="stocks-print-movements" onclick="console.log('🖨️ onclick HTML déclenché'); if(window.movementsModule && window.movementsModule.printButtonHandler) { window.movementsModule.printButtonHandler(event); } else { document.getElementById('movements-print-filters').style.display='block'; } return false;"><?php esc_html_e('Imprimer les mouvements', 'sempa'); ?></button>
+                                <button type="button" class="button button--ghost" id="stocks-print-movements"><?php esc_html_e('Imprimer les mouvements', 'sempa'); ?></button>
                                 <button type="button" class="button button--secondary" id="stocks-open-movement-form"><?php esc_html_e('Enregistrer un mouvement', 'sempa'); ?></button>
                             </div>
                         </div>
