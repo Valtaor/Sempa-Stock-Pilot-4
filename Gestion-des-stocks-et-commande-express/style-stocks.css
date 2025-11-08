@@ -1097,11 +1097,11 @@
     max-height: 90vh !important;
     overflow-y: auto !important;
     z-index: 9999 !important;
-    display: none !important;
+    /* display géré par JavaScript - ne pas mettre !important */
 }
 
-#stocks-import-panel:not([hidden]) {
-    display: flex !important;
+#stocks-import-panel[hidden] {
+    display: none;
 }
 
 /* Backdrop pour le panel d'import */

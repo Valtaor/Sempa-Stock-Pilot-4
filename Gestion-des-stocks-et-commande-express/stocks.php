@@ -383,8 +383,10 @@ document.addEventListener('DOMContentLoaded', function() {
             e.stopPropagation();
             const importPanel = document.getElementById('stocks-import-panel');
             if (importPanel) {
-                importPanel.hidden = false;
-                console.log('✅ Panel d\'import affiché');
+                // Forcer l'affichage avec display: flex au lieu de hidden
+                importPanel.removeAttribute('hidden');
+                importPanel.style.display = 'flex';
+                console.log('✅ Panel d\'import affiché avec display: flex');
             } else {
                 console.error('❌ Élément stocks-import-panel non trouvé');
             }
@@ -408,7 +410,10 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const importPanel = document.getElementById('stocks-import-panel');
             if (importPanel) {
-                importPanel.hidden = true;
+                // Forcer la fermeture avec display: none
+                importPanel.style.display = 'none';
+                importPanel.setAttribute('hidden', 'hidden');
+                console.log('✅ Panel fermé avec display: none');
             }
         });
     }
