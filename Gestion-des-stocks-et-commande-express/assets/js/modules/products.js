@@ -294,8 +294,8 @@ class ProductsModule {
       });
     });
 
-    // Appliquer la vue sauvegardée au démarrage
-    this.switchViewType(this.currentViewType);
+    // Appliquer la vue sauvegardée au démarrage (sans re-render)
+    this.applyViewType(this.currentViewType);
 
     console.log('✅ Event listeners initialisés');
   }
@@ -469,6 +469,43 @@ class ProductsModule {
     if (nextBtn) {
       nextBtn.disabled = this.currentPage >= totalPages;
     }
+  }
+
+  /**
+   * Applique le type de vue sans re-render (pour l'initialisation)
+   */
+  applyViewType(viewType) {
+    console.log(`✅ Application de la vue: ${viewType} (sans render)`);
+
+    this.currentViewType = viewType;
+    localStorage.setItem('productsViewType', viewType);
+
+    // Mettre à jour les boutons toggle
+    const toggleBtns = document.querySelectorAll('.view-toggle__btn');
+    toggleBtns.forEach(btn => {
+      const btnViewType = btn.getAttribute('data-view-type');
+      if (btnViewType === viewType) {
+        btn.classList.add('view-toggle__btn--active');
+        btn.setAttribute('aria-pressed', 'true');
+      } else {
+        btn.classList.remove('view-toggle__btn--active');
+        btn.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    // Afficher/masquer les conteneurs avec classes CSS
+    const gridContainer = document.getElementById('products-grid-container');
+    const tableContainer = document.getElementById('products-table-container');
+
+    if (viewType === 'grid') {
+      if (gridContainer) gridContainer.classList.add('products-view--active');
+      if (tableContainer) tableContainer.classList.remove('products-view--active');
+    } else {
+      if (gridContainer) gridContainer.classList.remove('products-view--active');
+      if (tableContainer) tableContainer.classList.add('products-view--active');
+    }
+
+    console.log(`✅ Vue appliquée: ${viewType} (sans render)`);
   }
 
   /**
