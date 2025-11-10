@@ -452,13 +452,14 @@
     color: var(--sp-color-primary-dark);
 }
 
-/* Vues produits */
+/* Vues produits - Contrôle d'affichage par classes */
 .products-view {
+    display: none;
     transition: opacity 0.2s ease;
 }
 
 .products-view--active {
-    display: block;
+    display: block !important;
 }
 
 .section-eyebrow {
