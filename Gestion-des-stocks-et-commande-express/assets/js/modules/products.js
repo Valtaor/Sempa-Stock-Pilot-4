@@ -17,6 +17,7 @@ class ProductsModule {
       supplier: '',
       status: ''
     };
+    this.currentViewType = localStorage.getItem('productsViewType') || 'grid'; // 'grid' ou 'table'
     this.initialized = false;
   }
 
@@ -284,6 +285,18 @@ class ProductsModule {
       });
     }
 
+    // Toggle de vue (cartes/tableau)
+    const viewToggleBtns = document.querySelectorAll('.view-toggle__btn');
+    viewToggleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const viewType = btn.getAttribute('data-view-type');
+        this.switchViewType(viewType);
+      });
+    });
+
+    // Appliquer la vue sauvegardée au démarrage
+    this.switchViewType(this.currentViewType);
+
     console.log('✅ Event listeners initialisés');
   }
 
@@ -334,10 +347,24 @@ class ProductsModule {
   }
 
   /**
-   * Affiche les produits
+   * Affiche les produits (selon la vue active)
    */
   renderProducts() {
     console.log('🎨 Début renderProducts()');
+
+    // Appeler la méthode appropriée selon la vue active
+    if (this.currentViewType === 'table') {
+      this.renderProductsTable();
+    } else {
+      this.renderProductsGrid();
+    }
+  }
+
+  /**
+   * Affiche les produits en mode grille (cartes)
+   */
+  renderProductsGrid() {
+    console.log('🎨 Rendu des produits en mode grille');
 
     try {
       // Vérifier que le conteneur existe
@@ -406,7 +433,7 @@ class ProductsModule {
         console.log('✅ Pagination mise à jour');
       }, 300);
     } catch (error) {
-      console.error('❌ Erreur dans renderProducts():', error);
+      console.error('❌ Erreur dans renderProductsGrid():', error);
       this.showError('Erreur lors de l\'affichage des produits');
     }
   }
@@ -442,6 +469,158 @@ class ProductsModule {
     if (nextBtn) {
       nextBtn.disabled = this.currentPage >= totalPages;
     }
+  }
+
+  /**
+   * Bascule entre la vue grille et la vue tableau
+   */
+  switchViewType(viewType) {
+    console.log(`🔄 Basculement vers vue ${viewType}`);
+
+    this.currentViewType = viewType;
+    localStorage.setItem('productsViewType', viewType);
+
+    // Mettre à jour les boutons toggle
+    const toggleBtns = document.querySelectorAll('.view-toggle__btn');
+    toggleBtns.forEach(btn => {
+      const btnViewType = btn.getAttribute('data-view-type');
+      if (btnViewType === viewType) {
+        btn.classList.add('view-toggle__btn--active');
+        btn.setAttribute('aria-pressed', 'true');
+      } else {
+        btn.classList.remove('view-toggle__btn--active');
+        btn.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    // Afficher/masquer les conteneurs
+    const gridContainer = document.getElementById('products-grid-container');
+    const tableContainer = document.getElementById('products-table-container');
+
+    if (viewType === 'grid') {
+      gridContainer.style.display = 'block';
+      tableContainer.style.display = 'none';
+    } else {
+      gridContainer.style.display = 'none';
+      tableContainer.style.display = 'block';
+    }
+
+    // Re-render avec la nouvelle vue
+    this.renderProducts();
+
+    console.log(`✅ Vue basculée vers ${viewType}`);
+  }
+
+  /**
+   * Affiche les produits en mode tableau
+   */
+  renderProductsTable() {
+    console.log('🎨 Rendu des produits en mode tableau');
+
+    const tbody = document.getElementById('products-table-body');
+    if (!tbody) {
+      console.error('❌ Tableau tbody non trouvé');
+      return;
+    }
+
+    // Calculer la pagination
+    const startIndex = (this.currentPage - 1) * this.perPage;
+    const endIndex = startIndex + this.perPage;
+    const productsToShow = this.filteredProducts.slice(startIndex, endIndex);
+
+    // Vider le tableau
+    tbody.innerHTML = '';
+
+    if (productsToShow.length === 0) {
+      const emptyRow = document.createElement('tr');
+      emptyRow.innerHTML = '<td colspan="9" class="empty">Aucun produit à afficher</td>';
+      tbody.appendChild(emptyRow);
+      return;
+    }
+
+    // Remplir le tableau
+    productsToShow.forEach(product => {
+      const row = document.createElement('tr');
+
+      // Déterminer le statut du stock
+      const stockActuel = parseInt(product.stock_actuel) || 0;
+      const stockMin = parseInt(product.stock_minimum) || 0;
+      let stockClass = '';
+      if (stockActuel <= 0) {
+        stockClass = 'stock-critical';
+      } else if (stockActuel <= stockMin) {
+        stockClass = 'stock-warning';
+      }
+
+      row.className = stockClass;
+      row.innerHTML = `
+        <td>${this.escapeHtml(product.reference || '')}</td>
+        <td><strong>${this.escapeHtml(product.designation || '')}</strong></td>
+        <td>${this.escapeHtml(product.categorie || '-')}</td>
+        <td>${this.escapeHtml(product.fournisseur || '-')}</td>
+        <td class="${stockClass}">${stockActuel}</td>
+        <td>${product.prix_achat ? parseFloat(product.prix_achat).toFixed(2) + ' €' : '-'}</td>
+        <td>${product.prix_vente ? parseFloat(product.prix_vente).toFixed(2) + ' €' : '-'}</td>
+        <td><span class="badge badge--${product.etat_materiel === 'neuf' ? 'success' : 'info'}">${this.escapeHtml(product.etat_materiel || 'N/A')}</span></td>
+        <td>
+          <details class="actions-menu">
+            <summary class="actions-menu__trigger" aria-label="Actions">
+              <i data-lucide="more-horizontal"></i>
+            </summary>
+            <div class="actions-menu__content">
+              <button data-action="edit" data-product-id="${product.id}">
+                <i data-lucide="edit-2"></i>
+                Modifier
+              </button>
+              <button data-action="duplicate" data-product-id="${product.id}">
+                <i data-lucide="copy"></i>
+                Dupliquer
+              </button>
+              <button data-action="delete" data-product-id="${product.id}" class="danger">
+                <i data-lucide="trash-2"></i>
+                Supprimer
+              </button>
+            </div>
+          </details>
+        </td>
+      `;
+
+      // Ajouter les event listeners pour les actions
+      const editBtn = row.querySelector('[data-action="edit"]');
+      const duplicateBtn = row.querySelector('[data-action="duplicate"]');
+      const deleteBtn = row.querySelector('[data-action="delete"]');
+
+      if (editBtn) {
+        editBtn.addEventListener('click', () => this.editProduct(product));
+      }
+      if (duplicateBtn) {
+        duplicateBtn.addEventListener('click', () => this.duplicateProduct(product));
+      }
+      if (deleteBtn) {
+        deleteBtn.addEventListener('click', () => this.deleteProduct(product));
+      }
+
+      tbody.appendChild(row);
+    });
+
+    // Initialiser les icônes Lucide
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+
+    // Mettre à jour la pagination
+    this.updatePaginationInfo();
+
+    console.log(`✅ ${productsToShow.length} produits affichés dans le tableau`);
+  }
+
+  /**
+   * Échappe les caractères HTML
+   */
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
   }
 
   /**

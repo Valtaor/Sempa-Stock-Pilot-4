@@ -572,6 +572,16 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <p class="section-subtitle"><?php esc_html_e('Gérez vos références, fournisseurs et niveaux de stock.', 'sempa'); ?></p>
                             </div>
                             <div class="section-actions">
+                                <div class="view-toggle" role="group" aria-label="<?php esc_attr_e('Basculer la vue', 'sempa'); ?>">
+                                    <button type="button" class="view-toggle__btn view-toggle__btn--active" data-view-type="grid" aria-pressed="true">
+                                        <i data-lucide="layout-grid"></i>
+                                        <span><?php esc_html_e('Cartes', 'sempa'); ?></span>
+                                    </button>
+                                    <button type="button" class="view-toggle__btn" data-view-type="table" aria-pressed="false">
+                                        <i data-lucide="table"></i>
+                                        <span><?php esc_html_e('Tableau', 'sempa'); ?></span>
+                                    </button>
+                                </div>
                                 <button type="button" class="button button--primary" id="stocks-open-product-form"><?php esc_html_e('Ajouter un produit', 'sempa'); ?></button>
                             </div>
                         </div>
@@ -598,10 +608,36 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         </div>
                         <!-- Grille de produits (mode carte) -->
-                        <div id="products-grid-container">
+                        <div id="products-grid-container" class="products-view products-view--active">
                             <div class="sp-empty-state">
                                 <i data-lucide="loader"></i>
                                 <p><?php esc_html_e('Chargement des produits...', 'sempa'); ?></p>
+                            </div>
+                        </div>
+
+                        <!-- Tableau de produits (mode tableau) -->
+                        <div id="products-table-container" class="products-view" style="display: none;">
+                            <div class="table-wrapper">
+                                <table class="stocks-table" id="stocks-products-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"><?php esc_html_e('Référence', 'sempa'); ?></th>
+                                            <th scope="col"><?php esc_html_e('Désignation', 'sempa'); ?></th>
+                                            <th scope="col"><?php esc_html_e('Catégorie', 'sempa'); ?></th>
+                                            <th scope="col"><?php esc_html_e('Fournisseur', 'sempa'); ?></th>
+                                            <th scope="col"><?php esc_html_e('Stock', 'sempa'); ?></th>
+                                            <th scope="col"><?php esc_html_e('Prix achat', 'sempa'); ?></th>
+                                            <th scope="col"><?php esc_html_e('Prix vente', 'sempa'); ?></th>
+                                            <th scope="col"><?php esc_html_e('État', 'sempa'); ?></th>
+                                            <th scope="col"><?php esc_html_e('Actions', 'sempa'); ?></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="products-table-body">
+                                        <tr>
+                                            <td colspan="9" class="empty"><?php esc_html_e('Chargement des produits...', 'sempa'); ?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
 
