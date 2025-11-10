@@ -493,40 +493,40 @@ class ProductsModule {
       }
     });
 
-    // Afficher/masquer les conteneurs
+    // Afficher/masquer les conteneurs avec des CLASSES CSS (pas de style inline)
     const gridContainer = document.getElementById('products-grid-container');
     const tableContainer = document.getElementById('products-table-container');
 
     console.log('📊 État des conteneurs AVANT:', {
       gridExists: !!gridContainer,
       tableExists: !!tableContainer,
+      gridHasActive: gridContainer ? gridContainer.classList.contains('products-view--active') : false,
+      tableHasActive: tableContainer ? tableContainer.classList.contains('products-view--active') : false,
       gridDisplay: gridContainer ? window.getComputedStyle(gridContainer).display : 'N/A',
       tableDisplay: tableContainer ? window.getComputedStyle(tableContainer).display : 'N/A'
     });
 
     if (viewType === 'grid') {
+      // Afficher la grille, masquer le tableau
       if (gridContainer) {
-        gridContainer.style.display = 'block';
-        gridContainer.style.visibility = 'visible';
-        gridContainer.style.opacity = '1';
+        gridContainer.classList.add('products-view--active');
       }
       if (tableContainer) {
-        tableContainer.style.display = 'none';
+        tableContainer.classList.remove('products-view--active');
       }
     } else {
+      // Masquer la grille, afficher le tableau
       if (gridContainer) {
-        gridContainer.style.display = 'none';
+        gridContainer.classList.remove('products-view--active');
       }
       if (tableContainer) {
-        tableContainer.style.display = 'block';
-        tableContainer.style.visibility = 'visible';
-        tableContainer.style.opacity = '1';
-        tableContainer.style.position = 'relative';
-        tableContainer.style.zIndex = '1';
+        tableContainer.classList.add('products-view--active');
       }
     }
 
     console.log('📊 État des conteneurs APRÈS:', {
+      gridHasActive: gridContainer ? gridContainer.classList.contains('products-view--active') : false,
+      tableHasActive: tableContainer ? tableContainer.classList.contains('products-view--active') : false,
       gridDisplay: gridContainer ? window.getComputedStyle(gridContainer).display : 'N/A',
       tableDisplay: tableContainer ? window.getComputedStyle(tableContainer).display : 'N/A',
       tableVisibility: tableContainer ? window.getComputedStyle(tableContainer).visibility : 'N/A',
