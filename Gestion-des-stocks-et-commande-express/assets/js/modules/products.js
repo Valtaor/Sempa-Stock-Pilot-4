@@ -497,13 +497,42 @@ class ProductsModule {
     const gridContainer = document.getElementById('products-grid-container');
     const tableContainer = document.getElementById('products-table-container');
 
+    console.log('📊 État des conteneurs AVANT:', {
+      gridExists: !!gridContainer,
+      tableExists: !!tableContainer,
+      gridDisplay: gridContainer ? window.getComputedStyle(gridContainer).display : 'N/A',
+      tableDisplay: tableContainer ? window.getComputedStyle(tableContainer).display : 'N/A'
+    });
+
     if (viewType === 'grid') {
-      gridContainer.style.display = 'block';
-      tableContainer.style.display = 'none';
+      if (gridContainer) {
+        gridContainer.style.display = 'block';
+        gridContainer.style.visibility = 'visible';
+        gridContainer.style.opacity = '1';
+      }
+      if (tableContainer) {
+        tableContainer.style.display = 'none';
+      }
     } else {
-      gridContainer.style.display = 'none';
-      tableContainer.style.display = 'block';
+      if (gridContainer) {
+        gridContainer.style.display = 'none';
+      }
+      if (tableContainer) {
+        tableContainer.style.display = 'block';
+        tableContainer.style.visibility = 'visible';
+        tableContainer.style.opacity = '1';
+        tableContainer.style.position = 'relative';
+        tableContainer.style.zIndex = '1';
+      }
     }
+
+    console.log('📊 État des conteneurs APRÈS:', {
+      gridDisplay: gridContainer ? window.getComputedStyle(gridContainer).display : 'N/A',
+      tableDisplay: tableContainer ? window.getComputedStyle(tableContainer).display : 'N/A',
+      tableVisibility: tableContainer ? window.getComputedStyle(tableContainer).visibility : 'N/A',
+      tableOpacity: tableContainer ? window.getComputedStyle(tableContainer).opacity : 'N/A',
+      tableOffsetHeight: tableContainer ? tableContainer.offsetHeight : 'N/A'
+    });
 
     // Re-render avec la nouvelle vue
     this.renderProducts();
