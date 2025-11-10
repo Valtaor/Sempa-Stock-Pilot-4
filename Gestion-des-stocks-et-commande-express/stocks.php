@@ -602,7 +602,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         </div>
                         <!-- Grille de produits (mode carte) -->
-                        <div id="products-grid-container" class="products-view products-view--active">
+                        <div id="products-grid-container" class="products-view">
                             <div class="sp-empty-state">
                                 <i data-lucide="loader"></i>
                                 <p><?php esc_html_e('Chargement des produits...', 'sempa'); ?></p>
