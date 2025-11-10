@@ -617,7 +617,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
 
                         <!-- Tableau de produits (mode tableau) -->
-                        <div id="products-table-container" class="products-view" style="display: none;">
+                        <div id="products-table-container" class="products-view">
                             <div class="table-wrapper">
                                 <table class="stocks-table" id="stocks-products-table">
                                     <thead>
@@ -634,9 +634,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         </tr>
                                     </thead>
                                     <tbody id="products-table-body">
-                                        <tr>
-                                            <td colspan="9" class="empty"><?php esc_html_e('Chargement des produits...', 'sempa'); ?></td>
-                                        </tr>
+                                        <!-- Le contenu sera généré par JavaScript -->
                                     </tbody>
                                 </table>
                             </div>
