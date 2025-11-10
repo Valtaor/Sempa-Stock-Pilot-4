@@ -76,13 +76,6 @@ body,
     opacity: 1 !important;
 }
 
-/* Ne pas forcer le display sur les conteneurs de vue - laissé JS gérer */
-#view-products #products-grid-container,
-#view-products #products-table-container {
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
 #view-products .sp-product-card {
     display: flex !important;
     visibility: visible !important;
